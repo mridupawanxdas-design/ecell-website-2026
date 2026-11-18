@@ -10,6 +10,7 @@ import Footer from "../components/Landing/Footer";
 import Speakers from "~/components/Speakers";
 import DirectorsMessage from "~/components/DirectorsMessage";
 import FaqSection from "~/components/FaqSection";
+import MonthlyDigestSection from "../components/Digest/MonthlyDigestSection";
 
 export default function Page() {
   return (
@@ -24,6 +25,7 @@ export default function Page() {
         <Speakers />
         <DirectorsMessage />
         <Testimonials />
+        <MonthlyDigestSection />
         <ContactForm />
         <Footer />
       </div>
