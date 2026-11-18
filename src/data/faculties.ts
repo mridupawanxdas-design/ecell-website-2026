@@ -5,6 +5,7 @@ export interface FacultyMember {
   content: string;
   image?: string;
   image2?: string;
+  iicUrl?: string;
 }
 
 export const facultiesData: FacultyMember[] = [
@@ -18,6 +19,7 @@ export const facultiesData: FacultyMember[] = [
       "https://res.cloudinary.com/ecell/image/upload/v1756627441/IMG_174134284467cac87c778b1_kzqtmj.jpg",
     content:
       "Prof. Rahul Dev Misra is a professor in the mechanical engineering department and the president of IIC, NIT Silchar. He is the backbone of IIC and has been an excellent mentor to the students and a great support to the organization.",
+    iicUrl: "https://www.nits.ac.in/nisp.php",
   },
   {
     id: 2,
@@ -29,6 +31,7 @@ export const facultiesData: FacultyMember[] = [
       "https://res.cloudinary.com/dnvhl9pru/image/upload/v1676994356/E-Cell%20Faculties/WasimArifSir_s5k3w9.jpg",
     content:
       "Dr. Wasim Arif is an associate professor in the department of Electronics and Communication and is a faculty advisor at E-Cell, NIT Silchar. He has always been a guiding support to the organization and has always guided the members in the right direction.",
+    iicUrl: "https://www.nits.ac.in/nisp.php",
   },
   {
     id: 3,
@@ -40,5 +43,6 @@ export const facultiesData: FacultyMember[] = [
       "https://res.cloudinary.com/dfriijrmr/image/upload/v1677474386/GalleryPage/Orientation%202022-2023/IMG_1558_vjql6g.jpg",
     content:
       "Dr. A.B. Deoghare is an associate professor in the department of mechanical engineering and supports the E-Cell organization as a faculty advisor. We are eternally grateful for the support and guidance that we have received from him.",
+    iicUrl: "https://www.nits.ac.in/nisp.php",
   },
 ];

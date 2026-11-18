@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import { facultiesData } from "@/data/faculties";
 
 interface ModalCardFacultiesProps {
@@ -52,6 +54,20 @@ export default function ModalCardFaculties({
         <p className="text-sm leading-relaxed font-light text-gray-300 md:text-base">
           {member.content}
         </p>
+
+        {member.iicUrl && (
+          <div className="pt-2">
+            <Link
+              href={member.iicUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-blue-500/30 bg-blue-600/20 px-4 py-2.5 text-xs font-semibold tracking-wider text-blue-300 uppercase transition-colors hover:border-blue-400 hover:bg-blue-600/30 hover:text-white"
+            >
+              <span>View on IIC Portal</span>
+              <ExternalLink size={14} />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

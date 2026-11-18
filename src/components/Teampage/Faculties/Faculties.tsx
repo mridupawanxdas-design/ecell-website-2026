@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 import { facultiesData } from "@/data/faculties";
 import TeamCard from "@/components/Teampage/TeamCard";
 import ModalCardFaculties from "../Modal/ModalCardFaculties";
@@ -34,6 +35,15 @@ export default function Faculties() {
             Our Mentors
           </h2>
           <div className="mt-6 h-1 w-24 rounded-full bg-blue-600 opacity-50 shadow-[0_0_10px_rgba(37,99,235,0.8)]" />
+          <Link
+            href="https://www.nits.ac.in/nisp.php"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs font-medium tracking-wide text-blue-300 transition-colors hover:border-blue-400/40 hover:bg-blue-500/20 hover:text-white"
+          >
+            <span>Institution&apos;s Innovation Council (IIC) NIT Silchar</span>
+            <ExternalLink size={13} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
