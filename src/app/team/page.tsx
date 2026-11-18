@@ -22,6 +22,13 @@ export default function TeamPage() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes("alumni")) {
+        setActiveTab("alumni");
+      }
+    }
+
     function handleClickOutside(event: MouseEvent) {
       if (
         dropdownRef.current &&

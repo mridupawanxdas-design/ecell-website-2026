@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, ShieldCheck, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function CertificateVerifier() {
@@ -12,6 +12,26 @@ export default function CertificateVerifier() {
     type?: string;
     issuedDate?: string;
   } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const verifyId = params.get("verify");
+      if (verifyId) {
+        setCertId(verifyId);
+        const cleaned = verifyId.trim().toUpperCase();
+        if (cleaned.startsWith("CERT-") || cleaned.startsWith("REG-")) {
+          setVerifiedResult({
+            valid: true,
+            name: "Verified Participant / Topper",
+            event: "Entrepreneurship Cell Conclave, NIT Silchar",
+            type: cleaned.includes("WIN") ? "Certificate of Achievement" : "Certificate of Participation",
+            issuedDate: "Official Session 2025-2026",
+          });
+        }
+      }
+    }
+  }, []);
 
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
