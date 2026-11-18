@@ -10,12 +10,13 @@ import Footer from "@/components/Landing/Footer";
 import Faculties from "@/components/Teampage/Faculties/Faculties";
 import CoreTeam from "@/components/Teampage/CoreTeam/CoreTeam";
 import Developers from "@/components/Teampage/Developers/Developers";
+import AlumniCommunitySection from "@/components/Teampage/AlumniCommunity/AlumniCommunitySection";
 import { type CoreYear } from "@/data/coreTeam";
 
 export default function TeamPage() {
-  const [activeTab, setActiveTab] = useState<"faculty" | "core" | "developers">(
-    "faculty",
-  );
+  const [activeTab, setActiveTab] = useState<
+    "faculty" | "core" | "developers" | "alumni"
+  >("faculty");
   const [selectedYear, setSelectedYear] = useState<CoreYear>("2026-2027");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -194,6 +195,24 @@ export default function TeamPage() {
                   />
                 )}
               </button>
+
+              <button
+                onClick={() => setActiveTab("alumni")}
+                className={`relative px-4 py-2 text-xs font-bold tracking-widest uppercase transition-all sm:px-5 md:px-6 md:text-sm ${
+                  activeTab === "alumni"
+                    ? "text-white"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
+              >
+                <span className="relative z-10">ALUMNI COMMUNITY</span>
+                {activeTab === "alumni" && (
+                  <motion.div
+                    layoutId="activeTabPill"
+                    className="absolute inset-0 rounded-full border border-blue-500/50 bg-blue-600/20"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </button>
             </div>
           </div>
         </section>
@@ -210,6 +229,7 @@ export default function TeamPage() {
               {activeTab === "faculty" && <Faculties />}
               {activeTab === "core" && <CoreTeam year={selectedYear} />}
               {activeTab === "developers" && <Developers />}
+              {activeTab === "alumni" && <AlumniCommunitySection />}
             </motion.div>
           </AnimatePresence>
         </section>
