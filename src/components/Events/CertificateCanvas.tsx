@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { Award, CheckCircle2, Download, Printer } from "lucide-react";
+import { Award, CheckCircle2, Printer } from "lucide-react";
 
 export interface CertificateData {
   recipientName: string;

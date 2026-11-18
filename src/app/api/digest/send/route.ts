@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { generateMonthlyDigestEmailHtml } from "@/lib/mail-templates";
 
+interface DigestSendPayload {
+  target?: "ALL" | "ALUMNI" | "STUDENTS";
+}
+
 export async function POST(req: Request) {
   try {
-    const { target } = await req.json();
+    const payload = (await req.json()) as DigestSendPayload;
+    const target = payload.target ?? "ALL";
 
     const sampleDigestHtml = generateMonthlyDigestEmailHtml({
       recipientName: "NIT Silchar Founder & Alum",
@@ -25,11 +30,11 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      message: `Monthly Digest triggered for ${target || "ALL"}.`,
+      message: `Monthly Digest triggered for ${target}.`,
       recipientCount: 538,
       previewHtml: sampleDigestHtml,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Failed to dispatch monthly digest." },
       { status: 500 }

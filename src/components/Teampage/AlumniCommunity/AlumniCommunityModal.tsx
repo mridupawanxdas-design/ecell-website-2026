@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Users, CheckCircle2, Send, Linkedin, Sparkles } from "lucide-react";
+import { X, Users, CheckCircle2, Send, Linkedin } from "lucide-react";
 import { type AlumniCommunityMember } from "@/data/alumniCommunity";
 
 interface AlumniCommunityModalProps {

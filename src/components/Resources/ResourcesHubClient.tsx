@@ -20,10 +20,6 @@ import {
   podcastsData,
   videosData,
   instagramData,
-  type BookResource,
-  type PodcastResource,
-  type VideoResource,
-  type InstagramResource,
 } from "@/data/resources";
 
 type TabType = "ALL" | "BLOGS" | "BOOKS" | "PODCASTS" | "VIDEOS" | "INSTAGRAM";

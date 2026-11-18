@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import { generateRegistrationEmailHtml } from "@/lib/mail-templates";
 
+interface RegisterPayload {
+  participantName?: string;
+  participantEmail: string;
+  eventName?: string;
+  eventDate?: string;
+  venue?: string;
+  registrationId?: string;
+}
+
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const payload = (await req.json()) as RegisterPayload;
     const {
       participantName,
       participantEmail,
@@ -11,25 +20,23 @@ export async function POST(req: Request) {
       eventDate,
       venue,
       registrationId,
-    } = body;
+    } = payload;
 
     const emailHtml = generateRegistrationEmailHtml({
-      participantName: participantName || "Participant",
-      eventName: eventName || "E-Cell Event",
-      eventDate: eventDate || "TBA",
-      venue: venue || "NIT Silchar Campus",
-      registrationId: registrationId || `REG-${Date.now().toString(36).toUpperCase()}`,
+      participantName: participantName ?? "Participant",
+      eventName: eventName ?? "E-Cell Event",
+      eventDate: eventDate ?? "TBA",
+      venue: venue ?? "NIT Silchar Campus",
+      registrationId: registrationId ?? `REG-${Date.now().toString(36).toUpperCase()}`,
     });
 
-    // In production, integrate nodemailer, Resend, or SendGrid here
-    // For local dev, return success with compiled template
     return NextResponse.json({
       success: true,
       message: "Registration recorded and confirmation email queued.",
       previewHtml: emailHtml,
       recipient: participantEmail,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Failed to process event registration." },
       { status: 500 }

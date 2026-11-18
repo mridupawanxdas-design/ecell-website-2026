@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,13 +12,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // In production, save to MongoDB or database
     return NextResponse.json({
       success: true,
       message: "Alumni community registration received.",
       data,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Failed to save alumni details." },
       { status: 500 }

@@ -46,7 +46,8 @@ export default function CertificateGeneratorModal({
     e.preventDefault();
     if (!recipientName) return;
 
-    const event = eventsList.find((ev) => ev.id === selectedEventId) || eventsList[0];
+    const event = eventsList.find((ev) => ev.id === selectedEventId) ?? eventsList[0];
+    if (!event) return;
     const generatedId = `CERT-NITS-${Date.now().toString(36).toUpperCase()}`;
 
     const certData: CertificateData = {

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, CheckCircle2, Send, Sparkles, Newspaper, Users } from "lucide-react";
+import { Mail, CheckCircle2, Send, Newspaper } from "lucide-react";
 
 export default function MonthlyDigestSection() {
   const [name, setName] = useState("");
@@ -47,7 +47,7 @@ export default function MonthlyDigestSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ target: dispatchTarget }),
       });
-      const data = await res.json();
+      const data = (await res.json()) as { recipientCount?: number };
       setDispatchStatus(`Successfully delivered to ${data.recipientCount ?? 420}+ subscribers!`);
     } catch {
       setDispatchStatus("Delivered successfully to registered subscribers queue.");

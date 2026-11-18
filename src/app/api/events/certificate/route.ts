@@ -4,9 +4,20 @@ import {
   generateEncouragementEmailHtml,
 } from "@/lib/mail-templates";
 
+interface CertificatePayload {
+  recipientEmail: string;
+  recipientName?: string;
+  eventName?: string;
+  eventDate?: string;
+  certificateType?: "Participation" | "Achievement";
+  rankOrPosition?: string;
+  certificateId?: string;
+  isNonWinnerEncouragement?: boolean;
+}
+
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const payload = (await req.json()) as CertificatePayload;
     const {
       recipientEmail,
       recipientName,
@@ -16,26 +27,27 @@ export async function POST(req: Request) {
       rankOrPosition,
       certificateId,
       isNonWinnerEncouragement,
-    } = body;
+    } = payload;
 
     let emailHtml: string;
 
     if (isNonWinnerEncouragement) {
       emailHtml = generateEncouragementEmailHtml({
-        recipientName: recipientName || "Participant",
-        eventName: eventName || "E-Cell Event",
+        recipientName: recipientName ?? "Participant",
+        eventName: eventName ?? "E-Cell Event",
         galleryUrl: "https://ecellnits.org/gallery",
         futureEventsUrl: "https://ecellnits.org/events",
       });
     } else {
+      const resolvedCertId = certificateId ?? `CERT-${Date.now().toString(36).toUpperCase()}`;
       emailHtml = generateCertificateEmailHtml({
-        recipientName: recipientName || "Participant",
-        eventName: eventName || "E-Cell Event",
-        eventDate: eventDate || "Recent Session",
-        certificateType: certificateType || "Participation",
+        recipientName: recipientName ?? "Participant",
+        eventName: eventName ?? "E-Cell Event",
+        eventDate: eventDate ?? "Recent Session",
+        certificateType: certificateType ?? "Participation",
         rankOrPosition,
-        certificateId: certificateId || `CERT-${Date.now().toString(36).toUpperCase()}`,
-        certificateUrl: `https://ecellnits.org/events?verify=${certificateId}`,
+        certificateId: resolvedCertId,
+        certificateUrl: `https://ecellnits.org/events?verify=${resolvedCertId}`,
         galleryUrl: "https://ecellnits.org/gallery",
         futureEventsUrl: "https://ecellnits.org/events",
       });
@@ -47,7 +59,7 @@ export async function POST(req: Request) {
       recipient: recipientEmail,
       previewHtml: emailHtml,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Failed to process certificate email." },
       { status: 500 }

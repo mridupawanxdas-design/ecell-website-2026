@@ -26,6 +26,7 @@ export default function Page() {
         <DirectorsMessage />
         <Testimonials />
         <MonthlyDigestSection />
+        <FaqSection />
         <ContactForm />
         <Footer />
       </div>

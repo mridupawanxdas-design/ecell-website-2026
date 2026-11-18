@@ -7,7 +7,7 @@ import ProjectCard from "@/components/Projects/ProjectCard";
 import ShareIdeaModal from "@/components/Projects/ShareIdeaModal";
 import CallForInternModal from "@/components/Projects/CallForInternModal";
 import CallForFundingModal from "@/components/Projects/CallForFundingModal";
-import { initialProjects, type ProjectItem, type ProjectCategory } from "@/data/projects";
+import { initialProjects, type ProjectItem } from "@/data/projects";
 import { Sparkles, Search, PlusCircle, Filter } from "lucide-react";
 
 export default function ProjectsPage() {
